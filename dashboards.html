@@ -3,81 +3,104 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dashboard | ExpatWealth</title>
+  <title>ExpatWealth Dashboard</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
 </head>
-<body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white min-h-screen">
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white font-sans">
 
-  <header class="bg-white dark:bg-gray-800 shadow px-6 py-4 flex justify-between items-center">
-    <h1 class="text-2xl font-bold text-indigo-600 dark:text-indigo-400">ExpatWealth Dashboard</h1>
-    <a href="/logout" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">Logout</a>
+  <!-- Top Nav -->
+  <header class="bg-white dark:bg-gray-800 shadow p-4 flex justify-between items-center sticky top-0 z-50">
+    <h1 class="text-2xl font-bold text-indigo-600 dark:text-indigo-400">ExpatWealth</h1>
+    <a href="/logout" class="text-sm bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded transition">Logout</a>
   </header>
 
-  <main class="p-6 space-y-10">
-    
-    <!-- Wallet Overview -->
+  <main class="p-6 space-y-12 max-w-6xl mx-auto">
+
+    <!-- Wallet Cards -->
     <section>
-      <h2 class="text-xl font-semibold mb-4">Multi-Currency Wallets</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div class="bg-white dark:bg-gray-800 p-4 rounded shadow">
-          <h3 class="font-bold">USD Wallet</h3>
-          <p>$1,200.00</p>
+      <h2 class="text-2xl font-semibold mb-4">Your Wallets</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-indigo-600 text-white p-6 rounded-2xl shadow">
+          <h3 class="text-lg font-medium">USD Balance</h3>
+          <p class="text-2xl font-bold mt-2" id="usd-balance">$3,250.00</p>
         </div>
-        <div class="bg-white dark:bg-gray-800 p-4 rounded shadow">
-          <h3 class="font-bold">EUR Wallet</h3>
-          <p>€850.00</p>
+        <div class="bg-emerald-600 text-white p-6 rounded-2xl shadow">
+          <h3 class="text-lg font-medium">EUR Balance</h3>
+          <p class="text-2xl font-bold mt-2">€2,115.40</p>
         </div>
-        <div class="bg-white dark:bg-gray-800 p-4 rounded shadow">
-          <h3 class="font-bold">JPY Wallet</h3>
-          <p>¥100,000</p>
+        <div class="bg-yellow-500 text-white p-6 rounded-2xl shadow">
+          <h3 class="text-lg font-medium">JPY Balance</h3>
+          <p class="text-2xl font-bold mt-2">¥432,000</p>
         </div>
       </div>
     </section>
 
-    <!-- Currency Converter -->
+    <!-- Add Salary -->
     <section>
-      <h2 class="text-xl font-semibold mb-4">Currency Converter</h2>
-      <form class="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl">
-        <input type="number" placeholder="Amount" class="p-2 rounded border dark:bg-gray-700 dark:border-gray-600" />
-        <select class="p-2 rounded border dark:bg-gray-700 dark:border-gray-600">
-          <option>From USD</option>
-          <option>From EUR</option>
-          <option>From JPY</option>
+      <h2 class="text-2xl font-semibold mb-4">Add Salary / Income</h2>
+      <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow flex flex-col sm:flex-row gap-4">
+        <input type="number" id="salary-input" placeholder="Enter income amount" class="flex-1 p-3 rounded border dark:bg-gray-700 dark:border-gray-600" />
+        <button onclick="addSalary()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded">+ Add</button>
+      </div>
+    </section>
+
+    <!-- Add Expense -->
+    <section>
+      <h2 class="text-2xl font-semibold mb-4">Add Expense</h2>
+      <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow space-y-4">
+        <input type="text" id="expense-desc" placeholder="Description" class="w-full p-3 rounded border dark:bg-gray-700 dark:border-gray-600" />
+        <input type="number" id="expense-amount" placeholder="Amount" class="w-full p-3 rounded border dark:bg-gray-700 dark:border-gray-600" />
+        <select id="expense-category" class="w-full p-3 rounded border dark:bg-gray-700 dark:border-gray-600">
+          <option>Food</option>
+          <option>Housing</option>
+          <option>Transportation</option>
+          <option>Entertainment</option>
+          <option>Other</option>
         </select>
-        <select class="p-2 rounded border dark:bg-gray-700 dark:border-gray-600">
-          <option>To USD</option>
-          <option>To EUR</option>
-          <option>To JPY</option>
-        </select>
-      </form>
+        <button onclick="addExpense()" class="bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded">+ Add Expense</button>
+      </div>
     </section>
 
     <!-- Expense Summary -->
     <section>
-      <h2 class="text-xl font-semibold mb-4">Monthly Expense Summary</h2>
-      <div class="bg-white dark:bg-gray-800 p-6 rounded shadow max-w-2xl">
-        <ul class="space-y-2">
-          <li class="flex justify-between">
-            <span>Housing</span>
-            <span>$500</span>
-          </li>
-          <li class="flex justify-between">
-            <span>Transportation</span>
-            <span>$150</span>
-          </li>
-          <li class="flex justify-between">
-            <span>Food</span>
-            <span>$300</span>
-          </li>
-          <li class="flex justify-between font-bold">
-            <span>Total</span>
-            <span>$950</span>
-          </li>
-        </ul>
+      <h2 class="text-2xl font-semibold mb-4">Monthly Spending Summary</h2>
+      <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow space-y-3" id="expense-list">
+        <p class="text-gray-500">No expenses yet.</p>
       </div>
     </section>
 
   </main>
 
+  <script>
+    let currentUSDBalance = 3250;
+
+    function addSalary() {
+      const input = document.getElementById("salary-input");
+      const amount = parseFloat(input.value);
+      if (!isNaN(amount)) {
+        currentUSDBalance += amount;
+        document.getElementById("usd-balance").textContent = `$${currentUSDBalance.toFixed(2)}`;
+        input.value = "";
+      }
+    }
+
+    function addExpense() {
+      const desc = document.getElementById("expense-desc").value.trim();
+      const amount = parseFloat(document.getElementById("expense-amount").value);
+      const category = document.getElementById("expense-category").value;
+      const list = document.getElementById("expense-list");
+
+      if (desc && !isNaN(amount)) {
+        const entry = document.createElement("div");
+        entry.className = "flex justify-between border-b py-2";
+        entry.innerHTML = `<span>${desc} (${category})</span><span>$${amount.toFixed(2)}</span>`;
+        list.appendChild(entry);
+        document.getElementById("expense-desc").value = "";
+        document.getElementById("expense-amount").value = "";
+      }
+    }
+  </script>
+
 </body>
 </html>
+
