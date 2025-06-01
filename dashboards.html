@@ -61,6 +61,26 @@
       </div>
     </section>
 
+    <!-- Currency Converter -->
+    <section>
+      <h2 class="text-2xl font-semibold mb-4">Currency Converter</h2>
+      <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow grid grid-cols-1 md:grid-cols-3 gap-4">
+        <input type="number" id="convert-amount" placeholder="Amount" class="p-3 rounded border dark:bg-gray-700 dark:border-gray-600" />
+        <select id="from-currency" class="p-3 rounded border dark:bg-gray-700 dark:border-gray-600">
+          <option value="USD">USD</option>
+          <option value="EUR">EUR</option>
+          <option value="JPY">JPY</option>
+        </select>
+        <select id="to-currency" class="p-3 rounded border dark:bg-gray-700 dark:border-gray-600">
+          <option value="USD">USD</option>
+          <option value="EUR">EUR</option>
+          <option value="JPY">JPY</option>
+        </select>
+        <button onclick="convertCurrency()" class="col-span-1 md:col-span-3 bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded">Convert</button>
+        <div id="conversion-result" class="col-span-1 md:col-span-3 text-center mt-2 text-lg font-semibold text-green-500"></div>
+      </div>
+    </section>
+
     <!-- Expense Summary -->
     <section>
       <h2 class="text-2xl font-semibold mb-4">Monthly Spending Summary</h2>
@@ -99,8 +119,27 @@
         document.getElementById("expense-amount").value = "";
       }
     }
+
+    async function convertCurrency() {
+      const amount = parseFloat(document.getElementById("convert-amount").value);
+      const from = document.getElementById("from-currency").value;
+      const to = document.getElementById("to-currency").value;
+      const resultEl = document.getElementById("conversion-result");
+
+      if (isNaN(amount)) return resultEl.textContent = "Enter a valid amount";
+
+      const response = await fetch('/api/convert', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ amount, from, to })
+      });
+
+      const data = await response.json();
+      resultEl.textContent = `${amount} ${from} = ${data.converted} ${to}`;
+    }
   </script>
 
 </body>
 </html>
+
 
