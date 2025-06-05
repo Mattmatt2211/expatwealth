@@ -1,10 +1,11 @@
-const fetch = require('node-fetch');
+const rates = {
+  USD: 1,
+  EUR: 1.1,
+  GBP: 1.25,
+  CAD: 0.75,
+};
 
-const API_URL = 'https://api.exchangerate.host/latest';
-
-exports.convert = async (from, to, amount) => {
-  const res = await fetch(`${API_URL}?base=${from}&symbols=${to}`);
-  const data = await res.json();
-  const rate = data.rates[to];
-  return amount * rate;
+exports.convert = (from, to, amount) => {
+  if (!rates[from] || !rates[to]) return amount;
+  return (amount / rates[from]) * rates[to];
 };
