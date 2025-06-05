@@ -8,13 +8,7 @@
 </head>
 <body class="bg-white text-gray-900 flex flex-col min-h-screen">
 
-  <header class="w-full px-6 py-4 flex justify-between items-center border-b border-gray-200 shadow-sm">
-    <h1 class="text-2xl font-bold text-indigo-600">ExpatWealth</h1>
-    <nav class="space-x-6 text-sm">
-      <a href="/index.html" class="hover:text-indigo-500">Home</a>
-      <a href="/signup.html" class="hover:text-indigo-500">Sign Up</a>
-    </nav>
-  </header>
+  <div id="global-header"></div>
 
   <main class="flex-grow flex items-center justify-center px-6">
     <div class="w-full max-w-md bg-white rounded shadow-md p-8 mt-12 mb-20">
@@ -53,6 +47,7 @@
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
+  <script src="/header.js"></script>
 </body>
 </html>
 
