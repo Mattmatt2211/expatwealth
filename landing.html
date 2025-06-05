@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ExpatWealth - Landing</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 min-h-screen flex flex-col">
+  <div id="root" class="flex-grow"></div>
+
+  <script type="text/babel">
+    function App() {
+      return (
+        <div className="text-white">
+          <Hero />
+          <Features />
+          <About />
+          <Testimonials />
+          <Pricing />
+          <Contact />
+          <Footer />
+        </div>
+      );
+    }
+
+    function Hero() {
+      return (
+        <section className="text-center py-20 px-4">
+          <h1 className="text-4xl md:text-6xl font-bold mb-4">Manage Your Expat Finances with Ease</h1>
+          <p className="text-lg md:text-xl max-w-2xl mx-auto mb-8">Stay on top of your expenses, convert currencies effortlessly, and track your monthly burn rates worldwide.</p>
+          <a href="/signup.html" className="bg-white text-indigo-600 font-semibold px-8 py-3 rounded shadow hover:bg-gray-100">Get Started</a>
+        </section>
+      );
+    }
+
+    function Features() {
+      const items = [
+        { title: 'Track Expenses', desc: 'Log and categorize your expenses in any currency.' },
+        { title: 'Convert Currencies', desc: 'Live exchange rates help you see values in your home currency.' },
+        { title: 'Monthly Burn Rates', desc: 'Understand how much you spend across different countries.' }
+      ];
+      return (
+        <section className="bg-white text-gray-800 py-16 px-4" id="features">
+          <h2 className="text-3xl font-bold text-center mb-8">Features</h2>
+          <div className="max-w-5xl mx-auto grid gap-6 sm:grid-cols-2 md:grid-cols-3">
+            {items.map((item, idx) => (
+              <div key={idx} className="bg-gray-50 p-6 rounded-lg shadow">
+                <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
+                <p className="text-gray-600">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      );
+    }
+
+    function About() {
+      return (
+        <section id="about" className="py-16 px-4">
+          <h2 className="text-3xl font-bold text-center mb-4">About Us</h2>
+          <p className="max-w-3xl mx-auto text-center text-gray-100">
+            ExpatWealth helps global citizens manage finances effortlessly across borders.
+          </p>
+        </section>
+      );
+    }
+
+    function Testimonials() {
+      const quotes = [
+        { text: 'ExpatWealth simplified my finances abroad like magic!', author: 'Sarah K.' },
+        { text: 'Tracking my spending in multiple currencies has never been easier.', author: 'James L.' },
+        { text: 'The burn rate feature keeps my budget on track while I travel.', author: 'Maria G.' },
+      ];
+      return (
+        <section className="py-16 px-4" id="testimonials">
+          <h2 className="text-3xl font-bold text-center mb-8">Testimonials</h2>
+          <div className="max-w-5xl mx-auto grid gap-6 sm:grid-cols-2 md:grid-cols-3">
+            {quotes.map((q, idx) => (
+              <div key={idx} className="bg-white text-gray-800 p-6 rounded-lg shadow">
+                <p className="italic mb-4">"{q.text}"</p>
+                <p className="font-semibold">- {q.author}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      );
+    }
+
+    function Pricing() {
+      const tiers = [
+        {
+          title: 'Free',
+          price: '$0',
+          features: ['3 wallets', 'Basic conversions', 'Expense tracking']
+        },
+        {
+          title: 'Pro',
+          price: '$9/mo',
+          features: ['Unlimited wallets', 'Detailed analytics', 'Rate alerts']
+        },
+        {
+          title: 'Business',
+          price: '$29/mo',
+          features: ['Team accounts', 'Advanced reporting', 'Priority support']
+        }
+      ];
+      return (
+        <section className="bg-white text-gray-800 py-16 px-4" id="pricing">
+          <h2 className="text-3xl font-bold text-center mb-8">Pricing</h2>
+          <div className="max-w-5xl mx-auto grid gap-6 sm:grid-cols-2 md:grid-cols-3">
+            {tiers.map((tier, idx) => (
+              <div key={idx} className="border rounded-lg p-6 text-center shadow bg-gray-50">
+                <h3 className="text-xl font-semibold mb-2 text-indigo-600">{tier.title}</h3>
+                <p className="text-2xl font-bold mb-4">{tier.price}</p>
+                <ul className="mb-6 text-gray-600">
+                  {tier.features.map((f, i) => (
+                    <li key={i}>{f}</li>
+                  ))}
+                </ul>
+                <button className="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700">Choose</button>
+              </div>
+            ))}
+          </div>
+        </section>
+      );
+    }
+
+    function Contact() {
+      return (
+        <section id="contact" className="py-16 px-4 bg-gray-100 text-gray-800">
+          <h2 className="text-3xl font-bold text-center mb-4">Contact Us</h2>
+          <p className="text-center">Reach us at <a href="mailto:support@expatwealth.com" className="text-indigo-600 underline">support@expatwealth.com</a></p>
+        </section>
+      );
+    }
+
+    function Footer() {
+      return (
+        <footer className="text-center py-8 bg-gray-800 text-gray-400" id="footer">
+          <p className="mb-4">© {new Date().getFullYear()} ExpatWealth</p>
+          <div className="space-x-4">
+            <a href="#about" className="hover:text-white">About</a>
+            <a href="#contact" className="hover:text-white">Contact</a>
+            <a href="https://github.com" className="hover:text-white">GitHub</a>
+          </div>
+        </footer>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+</html>
